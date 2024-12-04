@@ -29,7 +29,7 @@ venv/bin/python3 download.py
 ### ビルド
 
 `./Dockerfile`からDockerイメージをビルドします。  
-この際、`./src`以下のスクリプトと、モデルパラメーターがDockerコンテナ内に転送されます。  
+この際、`./src`以下のスクリプトと、`Dockerfile`内で指定したモデルパラメーターがDockerコンテナ内に転送されます。  
 
 > [!NOTE]
 > `[チーム名]`は適宜置き換えてください。
