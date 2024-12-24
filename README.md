@@ -4,7 +4,7 @@
 
 ## チューニング用スクリプト
 
-チューニングによるベースラインの構築方法につきましては、[tuning-competition-baseline](https://github.com/llm-jp/tuning-competition-baseline)をご覧ください。
+チューニングによるベースラインモデルの構築方法につきましては、[tuning-competition-baseline](https://github.com/llm-jp/tuning-competition-baseline)をご覧ください。
 
 ## 提出結果構築用スクリプト
 
