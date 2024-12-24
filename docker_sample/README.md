@@ -84,7 +84,7 @@ docker run --rm \
 ここでは、ローカルの`./data`をDockerコンテナ内の`/data`にマウントしています。  
 `./data`にjsonlファイルを作成し、入力パス`INPUT_PATH=/data/input.jsonl`を編集することで任意の入力を処理できます。
 
-### ビルドしたイメージの削除
+### 読み込んだイメージの削除
 
 ```
 sudo docker rmi [チームID]
