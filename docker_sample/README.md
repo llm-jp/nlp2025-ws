@@ -15,12 +15,12 @@ Huggig Face Hubから`llm-jp/llm-jp-3-1.8b-instruct`をローカルに保存し�
 
 > [!NOTE]
 > 本例では、1.8Bモデルを使用しますが、適宜3.7Bモデル、13Bモデルに置き換えてご使用ください。  
-> 別のモデルを使用する場合、手元のモデルのパスを`./Dockerfile`に設定してください。
+> 別のモデルを用いる場合は、`./Dockerfile`のモデルパスを編集してください。
 
 ```
 python3 -m venv venv
 venv/bin/pip3 install transformers
-venv/bin/python3 download.py
+venv/bin/python3 download.py llm-jp/llm-jp-3-1.8b-instruct
 ```
 
 ## Dockerイメージの保存
@@ -31,10 +31,10 @@ venv/bin/python3 download.py
 この際、`./src`以下のスクリプトと、`Dockerfile`内で指定したモデルパラメーターがDockerコンテナ内に転送されます。  
 
 > [!NOTE]
-> `[チーム名]`は適宜置き換えてください。
+> `[チーム]`は適宜置き換えてください。
 
 ```
-docker build . -t [チーム名]
+sudo docker build . -t [チームID]
 ```
 
 ### 保存
@@ -42,13 +42,47 @@ docker build . -t [チーム名]
 Dockerイメージをローカルに保存します。
 
 ```
-docker save [チーム名] > [チーム名].tar
+sudo docker save [チームID] > [チームID].tar
 ```
 
-最終評価では`[チーム名].tar`を提出してください。
+最終評価では`[チームID].tar`を提出してください。
+
+### ビルドしたイメージの削除
+
+```
+sudo docker rmi [チームID]
+```
 
 ## 動作検証
 
 実際に提出したDockerイメージが想定通り動くかどうか以下の手順でテストすることができます。
 
-**TBA**
+### 読み込み
+
+ローカルに保存したDockerイメージを読み込みます。
+
+```
+sudo docker load < [チームID].tar
+```
+
+### Dockerイメージの起動
+
+読み込んだDockerイメージを起動します。  
+`./data/output.jsonl`が書き出されていれば成功です。
+
+```bash
+docker run --rm \
+  --runtime=nvidia \
+  --gpus all \
+  --network none \
+  -v "$(pwd)/data:/data" \
+  -e INPUT_PATH=/data/input.jsonl \
+  -e OUTPUT_PATH=/data/output.jsonl \
+  [チームID]
+```
+
+### ビルドしたイメージの削除
+
+```
+sudo docker rmi [チームID]
+```
