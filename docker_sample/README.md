@@ -11,10 +11,11 @@ NLP2025ワークショップ２：「大規模言語モデルのファインチ�
 
 ### モデルダウンロード
 
-Huggig Face Hubから`llm-jp/llm-jp-3-13b-instruct`をローカルに保存します。  
+Huggig Face Hubから`llm-jp/llm-jp-3-1.8b-instruct`をローカルに保存します。  
 
 > [!NOTE]
-> 別のチューニングモデルを使用する場合、手元のモデルのパスを`./Dockerfile`に設定してください。
+> 本例では、1.8Bモデルを使用しますが、適宜3.7Bモデル、13Bモデルに置き換えてご使用ください。
+> 別のモデルを使用する場合、手元のモデルのパスを`./Dockerfile`に設定してください。
 
 ```
 python3 -m venv venv
