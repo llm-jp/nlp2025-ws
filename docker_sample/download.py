@@ -2,11 +2,16 @@
 Hugging Face Hubのモデルをダウンロードして、ローカルに保存する
 """
 
-from transformers import AutoTokenizer, AutoModelForCausalLM
+import argparse
+from huggingface_hub import snapshot_download
 
-tokenizer = AutoTokenizer.from_pretrained("llm-jp/llm-jp-3-13b-instruct")
-model = AutoModelForCausalLM.from_pretrained("llm-jp/llm-jp-3-13b-instruct")
+parser = argparse.ArgumentParser()
+parser.add_argument("model_name", type=str, default="llm-jp/llm-jp-3-13b-instruct")
+args = parser.parse_args()
 
-# Save the model
-model.save_pretrained("./models/llm-jp/llm-jp-3-13b-instruct")
-tokenizer.save_pretrained("./models/llm-jp/llm-jp-3-13b-instruct")
+snapshot_download(
+    repo_id=args.model_name,
+    revision="main",
+    local_dir=f"./models/{args.model_name}",
+    local_dir_use_symlinks=False
+)
