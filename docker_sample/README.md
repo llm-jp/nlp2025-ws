@@ -72,7 +72,6 @@ sudo docker load < [チームID].tar
 
 ```bash
 docker run --rm \
-  --runtime=nvidia \
   --gpus all \
   --network none \
   -v "$(pwd)/data:/data" \
