@@ -95,3 +95,11 @@ docker run --rm \
 ```
 sudo docker rmi [チームID]
 ```
+
+## よくあるエラーと対処法
+
+### ValueError: As of transformers v4.44, default chat template is no longer allowed, so you must provide a chat template if the tokenizer does not define one
+
+`src/main.py`は`vllm.LLM.chat`を使用しているため、使用する場合はchat-templateの登録が必要です。  
+[chat_templating#how-do-i-create-a-chat-template](https://huggingface.co/docs/transformers/v4.47.1/ja/chat_templating#how-do-i-create-a-chat-template)を参考に、chat-templateを作成し、手元のモデルの`tokenizer_config.json`に追記してください。  
+追記方法は、[llm-jp-3-1.8b-instruct/blob/main/tokenizer_config.json](https://huggingface.co/llm-jp/llm-jp-3-1.8b-instruct/blob/main/tokenizer_config.json)を参考にしてください。  
