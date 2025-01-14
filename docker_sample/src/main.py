@@ -24,7 +24,8 @@ def main():
 
     messages_list = []
     for d in data:
-        messages_list.append({"role": "user", "content": d["text"]})
+        messages = [{"role": "user", "content": d["text"]}]
+        messages_list.append(messages)
 
     outputs = llm.chat(messages_list)
     for i, output in enumerate(outputs):
