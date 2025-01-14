@@ -5,6 +5,13 @@ NLP2025ワークショップ２：「大規模言語モデルのファインチ�
 
 ## 事前準備
 
+### クローン
+
+```bash
+git clone https://github.com/llm-jp/nlp2025-ws.git
+cd nlp2025-ws/docker_sample
+```
+
 ### Dockerインストール
 
 計算環境にDockerを[インストール](https://docs.docker.com/engine/install/)してください。
