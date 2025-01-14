@@ -5,7 +5,7 @@ NLP2025ワークショップ２：「大規模言語モデルのファインチ�
 
 ## 事前準備
 
-### クローン
+### git clone
 
 ```bash
 git clone https://github.com/llm-jp/nlp2025-ws.git
