@@ -1,7 +1,7 @@
 import os
 import json
 import argparse
-from vllm import LLM
+from vllm import LLM, SamplingParams
 
 
 def main():
@@ -24,9 +24,14 @@ def main():
 
     messages_list = []
     for d in data:
-        messages_list.append({"role": "user", "content": d["text"]})
+        messages = [{"role": "user", "content": d["text"]}]
+        messages_list.append(messages)
 
-    outputs = llm.chat(messages_list)
+    sampling_params = SamplingParams(
+        max_tokens=1024,
+    )
+
+    outputs = llm.chat(messages_list, sampling_params=sampling_params)
     for i, output in enumerate(outputs):
         data[i]["response"] = output.outputs[0].text
 
