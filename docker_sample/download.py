@@ -6,7 +6,7 @@ import argparse
 from huggingface_hub import snapshot_download
 
 parser = argparse.ArgumentParser()
-parser.add_argument("model_name", type=str, default="llm-jp/llm-jp-3-13b-instruct")
+parser.add_argument("model_name", type=str, default="llm-jp/llm-jp-3-1.8b-instruct")
 args = parser.parse_args()
 
 snapshot_download(
