@@ -11,7 +11,9 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # vLLMのインストール
-RUN pip install --no-cache-dir vllm
+RUN pip install --no-cache-dir vllm nvidia-ml-py && \
+    pip uninstall --yes pynvml && \
+    pip install -U --no-cache-dir opencv-python-headless==4.5.5.62 openai
 
 # モデルファイルをイメージに取り込む (FIXME: モデルファイルのパスを変更)
 COPY ./models/llm-jp/llm-jp-3-1.8b-instruct /workspace/model

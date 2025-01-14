@@ -3,6 +3,8 @@ import json
 import argparse
 from vllm import LLM
 
+# see more examples at https://github.com/vllm-project/vllm/tree/main/examples
+chat_template = "{{ (messages|selectattr('role', 'equalto', 'system')|list|last).content|trim if (messages|selectattr('role', 'equalto', 'system')|list) else '' }}\n\n{% for message in messages %}\n{% if message['role'] == 'user' %}\n{{ message['content']|trim -}}\n{% if not loop.last %}\n\n\n{% endif %}\n{% elif message['role'] == 'assistant' %}\n{{ message['content']|trim -}}\n{% if not loop.last %}\n\n\n{% endif %}\n{% elif message['role'] == 'user_context' %}\n{{ message['content']|trim -}}\n{% if not loop.last %}\n\n\n{% endif %}\n{% endif %}\n{% endfor %}\n"
 
 def main():
     parser = argparse.ArgumentParser()
@@ -26,9 +28,9 @@ def main():
     for d in data:
         messages_list.append({"role": "user", "content": d["text"]})
 
-    outputs = llm.chat(messages_list)
-    for i, output in enumerate(outputs):
-        data[i]["response"] = output.outputs[0].text
+    for i, m in enumerate(messages_list):
+        output = llm.chat([m], chat_template=chat_template)
+        data[i]["response"] = output[0].outputs[0].text.strip()
 
     os.makedirs(os.path.dirname(args.output_path), exist_ok=True)
     with open(args.output_path, "w", encoding="utf-8") as f:
