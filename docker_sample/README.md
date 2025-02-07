@@ -77,6 +77,10 @@ sudo docker load < [チームID].tar
 読み込んだDockerイメージを起動します。  
 `./data/output.jsonl`が書き出されていれば成功です。
 
+> [!WARNING]
+> コンペティションの最終評価時には、以下の引数があらかじめ指定された状態で実行されます。
+> 任意の引数を追加・変更することはできませんので、あらかじめご了承ください。
+
 ```bash
 docker run --rm \
   --gpus all \
@@ -84,6 +88,7 @@ docker run --rm \
   -v "$(pwd)/data:/data" \
   -e INPUT_PATH=/data/input.jsonl \
   -e OUTPUT_PATH=/data/output.jsonl \
+  --shm-size 128g \
   [チームID]
 ```
 
